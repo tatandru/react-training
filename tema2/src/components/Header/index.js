@@ -1,5 +1,5 @@
 import "./style.scss";
-import React from "react";
+import React, { useState } from "react";
 
 const Header = ({ mainPageCallbackHeader }) => {
   const menu = [{ filterProperty: "a", filterValue: "Alcoholic" },
@@ -8,12 +8,30 @@ const Header = ({ mainPageCallbackHeader }) => {
   { filterProperty: "g", filterValue: "Cocktail glass" },
   { filterProperty: "g", filterValue: "Champagne flute" }];
 
-  const menuItem = menu.map((value, index) => {
-    return <span value={value.filterValue} property={value.filterProperty} key={index}
-      onClick={(event) => { mainPageCallbackHeader(value); event.preventDefault() }}>
+  const [keyOfDisabledButton, setKeyOfDisabledButton] = useState();
+
+  const menuItem=() => {
+    let buttons = [];
+    menu.map((value, index) => {
+      let disabledButton = <button disabled={true} value={value.filterValue} property={value.filterProperty} key={index}
+        onClick={(event) => { mainPageCallbackHeader(value); event.preventDefault(); }}
+        className={'menuItem'}>
+        {value.filterValue}
+      </button>
+      let activeButton=<button disabled={false} value={value.filterValue} property={value.filterProperty} key={index}
+      onClick={(event) => { mainPageCallbackHeader(value);setKeyOfDisabledButton(index); event.preventDefault(); }}
+      className={'menuItem'}>
       {value.filterValue}
-    </span>
-  })
+    </button>
+      if(index===keyOfDisabledButton){
+        buttons.push(disabledButton);
+      }else{
+        buttons.push(activeButton);
+      }
+    })
+    return buttons;
+  }
+
 
   return (
     <div className='header'>
@@ -23,7 +41,7 @@ const Header = ({ mainPageCallbackHeader }) => {
       </div>
 
       <div className="cocktailMenu">
-        {menuItem}
+        {menuItem()}
       </div>
     </div>
   );

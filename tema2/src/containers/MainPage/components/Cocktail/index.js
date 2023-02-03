@@ -1,8 +1,8 @@
 import "./style.scss"
 import React from "react"
 
-const Cocktail = () => {
-
+const Cocktail = (props) => {
+    console.log("props",props)
     return (
         <div className="cocktail">
             <div className="cocktailContainer">

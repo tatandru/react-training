@@ -1,5 +1,5 @@
 import "./style.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cocktail from "./components/Cocktail";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -8,9 +8,10 @@ import Footer from "../../components/Footer";
 
 const MainPage = () => {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState();
   const [menuItem, setMenuItem] = useState({});
 
+  let cocktails;
 
   function apiAlcoholic(menuItem) {
     let url = '';
@@ -25,7 +26,7 @@ const MainPage = () => {
         url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?g='+menuItem.filterValue;
         break;
       default:
-        url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+        url="https://www.thecocktaildb.com/api/json/v1/1/random.php"
         break;
     }
 
@@ -49,21 +50,19 @@ const MainPage = () => {
     setMenuItem(clickedMenuItem);
 
   }
+   useEffect(()=>{
+    console.log("menuitem",menuItem);
+    apiAlcoholic(menuItem);
+   },[menuItem]);
+
 
   return (
     <div className="mainPage">
-      <div className="header">
+      <div>
         <Header mainPageCallbackHeader={mainPageCallbackHeader} />
       </div>
-      <button onClick={console.log("asd")}></button>
       <div className="main">
-        <Cocktail />
-        <Cocktail />
-        <Cocktail />
-        <Cocktail />
-        <Cocktail />
-        <Cocktail />
-        <Cocktail />
+        <Cocktail cocktailInformation={data}></Cocktail>
       </div>
       <div className="footer">
         <Footer />
