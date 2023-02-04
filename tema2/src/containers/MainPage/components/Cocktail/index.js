@@ -1,18 +1,18 @@
 import "./style.scss"
 import React from "react"
 
-const Cocktail = (props) => {
-    console.log("props",props)
+const Cocktail = ({cocktailInformation}) => {
+
+    // const cocktail=props.cocktailInformation.drinks.map((value,index)=>{
+    //     return <button>{value}</button>
+
+    // })
+
     return (
         <div className="cocktail">
-            <div className="cocktailContainer">
-                <div className="cocktailImage">
-                    img
-                </div>
-                <div className="cocktailTitle">
-                    aaaaaaaaaaaa
-                </div>
-            </div>
+            <img src={cocktailInformation.strDrinkThumb}/>
+            <p class="cocktailName">{cocktailInformation.strDrink}</p>
+            
         </div>
 
 

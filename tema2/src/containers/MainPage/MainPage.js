@@ -11,8 +11,6 @@ const MainPage = () => {
   const [data, setData] = useState();
   const [menuItem, setMenuItem] = useState({});
 
-  let cocktails;
-
   function apiAlcoholic(menuItem) {
     let url = '';
     switch (menuItem.filterProperty) {
@@ -41,7 +39,6 @@ const MainPage = () => {
       })
       .then((data) => {
         setData(data);
-        console.log(data);
       })
       .catch((error) => { console.error(error) })
   }
@@ -50,23 +47,22 @@ const MainPage = () => {
     setMenuItem(clickedMenuItem);
 
   }
+
    useEffect(()=>{
-    console.log("menuitem",menuItem);
     apiAlcoholic(menuItem);
    },[menuItem]);
 
 
+
   return (
     <div className="mainPage">
-      <div>
         <Header mainPageCallbackHeader={mainPageCallbackHeader} />
-      </div>
       <div className="main">
-        <Cocktail cocktailInformation={data}></Cocktail>
+        {data ? data.drinks.map((value,index)=>{
+            return <Cocktail cocktailInformation={value} key={index}/>       
+        }):''}
       </div>
-      <div className="footer">
         <Footer />
-      </div>
 
     </div>
   );

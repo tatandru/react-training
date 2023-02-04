@@ -4,7 +4,7 @@ import './style.scss'
 const Footer = () => {
     return ( 
         <div className='footer'>
-            <h6>&copy;Copyright  2023</h6>
+            <span>&copy;Copyright  2023</span>
         </div>
 
      );

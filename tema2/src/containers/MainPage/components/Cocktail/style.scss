@@ -1,10 +1,26 @@
 .cocktail{
-    height: 400px;
-    width: 400px;
-    background-color: aqua;
-    margin: 20px;
+    width: 350px;
+    background-color: rgb(175, 175, 175);
+    margin: 10px;
+    display:flex;
+    flex-direction: column;
+    border:1px solid black;
+    
 }
-.cocktailContainer{
-    height: 100%;
+
+.cocktail img{
+    width:100%;
+    margin:0;
+}
+
+.cocktailName{
+    height:75px;
     width: 100%;
+    margin:0;
+    font-size: 26px;
+    border-top:1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
