@@ -9,8 +9,9 @@ const Header = ({ mainPageCallbackHeader }) => {
   { filterProperty: "g", filterValue: "Champagne flute" }];
 
   const [keyOfDisabledButton, setKeyOfDisabledButton] = useState();
+  const [searchQuery, setSearchQuery] = useState();
 
-  const menuItem=() => {
+  const menuItem = () => {
     let buttons = [];
     menu.map((value, index) => {
       let disabledButton = <button disabled={true} value={value.filterValue} property={value.filterProperty} key={index}
@@ -18,19 +19,21 @@ const Header = ({ mainPageCallbackHeader }) => {
         className={'menuItem'}>
         {value.filterValue}
       </button>
-      let activeButton=<button disabled={false} value={value.filterValue} property={value.filterProperty} key={index}
-      onClick={(event) => { mainPageCallbackHeader(value);setKeyOfDisabledButton(index); event.preventDefault(); }}
-      className={'menuItem'}>
-      {value.filterValue}
-    </button>
-      if(index===keyOfDisabledButton){
+      let activeButton = <button disabled={false} value={value.filterValue} property={value.filterProperty} key={index}
+        onClick={(event) => { mainPageCallbackHeader(value); setKeyOfDisabledButton(index); event.preventDefault(); }}
+        className={'menuItem'}>
+        {value.filterValue}
+      </button>
+      if (index === keyOfDisabledButton) {
         buttons.push(disabledButton);
-      }else{
+      } else {
         buttons.push(activeButton);
       }
     })
     return buttons;
   }
+
+  console.log("searchquery",searchQuery)
 
 
   return (
@@ -43,6 +46,11 @@ const Header = ({ mainPageCallbackHeader }) => {
       <div className="cocktailMenu">
         {menuItem()}
       </div>
+      <form className="searchBar">
+        <input type="text" placeholder="Search Cocktail by Name ..." className="searchBarInput" onChange={(event) => { setSearchQuery(event.target.value);event.preventDefault(); }}></input>
+        <button className="searchBarSubmit" onClick={(event) =>
+           { mainPageCallbackHeader({ filterProperty: "s", filterValue: searchQuery }); setSearchQuery("");event.preventDefault(); }}>Submit</button>
+      </form>
     </div>
   );
 };

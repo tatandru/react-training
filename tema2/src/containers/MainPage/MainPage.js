@@ -13,19 +13,28 @@ const MainPage = () => {
 
   function apiAlcoholic(menuItem) {
     let url = '';
-    switch (menuItem.filterProperty) {
-      case 'a':
-        url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a='+menuItem.filterValue;
-        break;
-      case 'c':
-        url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c='+menuItem.filterValue;
-        break;
-      case 'g':
-        url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?g='+menuItem.filterValue;
-        break;
-      default:
-        url="https://www.thecocktaildb.com/api/json/v1/1/random.php"
-        break;
+    console.log("filter value", menuItem.filterValue);
+    console.log("filter property", menuItem.filterProperty);
+    if (menuItem.filterValue === "") {
+      url = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+    } else {
+      switch (menuItem.filterProperty) {
+        case 'a':
+          url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=' + menuItem.filterValue;
+          break;
+        case 'c':
+          url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=' + menuItem.filterValue;
+          break;
+        case 'g':
+          url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=' + menuItem.filterValue;
+          break;
+        case 's':
+          url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + menuItem.filterValue;
+          break;
+        default:
+          url = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+          break;
+      }
     }
 
     fetch(url)
@@ -45,24 +54,23 @@ const MainPage = () => {
 
   const mainPageCallbackHeader = (clickedMenuItem) => {
     setMenuItem(clickedMenuItem);
-
   }
 
-   useEffect(()=>{
+  useEffect(() => {
     apiAlcoholic(menuItem);
-   },[menuItem]);
-
+    console.log("menuItem", menuItem)
+  }, [menuItem]);
 
 
   return (
     <div className="mainPage">
-        <Header mainPageCallbackHeader={mainPageCallbackHeader} />
+      <Header mainPageCallbackHeader={mainPageCallbackHeader} />
       <div className="main">
-        {data ? data.drinks.map((value,index)=>{
-            return <Cocktail cocktailInformation={value} key={index}/>       
-        }):''}
+        {data ? data.drinks.map((value, index) => {
+          return <Cocktail cocktailInformation={value} key={index} />
+        }) : ''}
       </div>
-        <Footer />
+      <Footer />
 
     </div>
   );

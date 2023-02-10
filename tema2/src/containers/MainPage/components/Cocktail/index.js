@@ -11,7 +11,7 @@ const Cocktail = ({cocktailInformation}) => {
     return (
         <div className="cocktail">
             <img src={cocktailInformation.strDrinkThumb}/>
-            <p class="cocktailName">{cocktailInformation.strDrink}</p>
+            <p className="cocktailName">{cocktailInformation.strDrink}</p>
             
         </div>
 

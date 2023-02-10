@@ -2,6 +2,10 @@
     width:100%;
     position:fixed;
     top:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
 }
 
@@ -35,4 +39,27 @@
 
 .menuItem:disabled{
     background-color: springgreen;
+}
+
+.searchBar{
+    height:50px;
+    width: 50%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.searchBarInput{
+    width: 100%;
+    background-color: darksalmon;
+    border-radius: 10px;
+    border-width: 0px;
+
+}
+.searchBarSubmit{
+    margin-left:5px;
+    background-color: darksalmon;
+    width: 20%;
+    border-radius: 10px;
+    border-width: 1px;
 }
