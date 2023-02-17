@@ -14,12 +14,17 @@
     height:100px;
     background-color: grey;
     display:flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 
 }
 .title{
+    width:50%;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.emptySpace{
+    width: 25%;
 }
 
 .cocktailMenu{
@@ -42,8 +47,8 @@
 }
 
 .searchBar{
+    width: 25%;
     height:50px;
-    width: 50%;
     margin-top: 10px;
     display: flex;
     flex-direction: row;
@@ -59,7 +64,7 @@
 .searchBarSubmit{
     margin-left:5px;
     background-color: darksalmon;
-    width: 20%;
     border-radius: 10px;
     border-width: 1px;
+    
 }

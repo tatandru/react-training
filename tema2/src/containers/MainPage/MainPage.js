@@ -47,13 +47,22 @@ const MainPage = () => {
 
       })
       .then((data) => {
-        setData(data);
+        if(data.drinks===null){
+          setData(undefined)
+        }else{
+          setData(data);
+        }
+        
       })
-      .catch((error) => { console.error(error) })
+      .catch((error) => { console.error(error);})
   }
 
   const mainPageCallbackHeader = (clickedMenuItem) => {
     setMenuItem(clickedMenuItem);
+  }
+
+  const mainPageCallbackCocktail = (clickedCocktail)=>{
+    setMenuItem(clickedCocktail);
   }
 
   useEffect(() => {
@@ -61,14 +70,14 @@ const MainPage = () => {
     console.log("menuItem", menuItem)
   }, [menuItem]);
 
-
   return (
     <div className="mainPage">
       <Header mainPageCallbackHeader={mainPageCallbackHeader} />
       <div className="main">
-        {data ? data.drinks.map((value, index) => {
-          return <Cocktail cocktailInformation={value} key={index} />
-        }) : ''}
+        {!data ? '' : data.drinks.map((value, index) => {
+          console.log("value",value)
+          return <Cocktail cocktailInformation={value} key={index} mainPageCallbackCocktail={mainPageCallbackCocktail}/>
+        }) }
       </div>
       <Footer />
 

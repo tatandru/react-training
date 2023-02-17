@@ -11,7 +11,7 @@ const Header = ({ mainPageCallbackHeader }) => {
   const [keyOfDisabledButton, setKeyOfDisabledButton] = useState();
   const [searchQuery, setSearchQuery] = useState();
 
-  const menuItem = () => {
+  const selectMenuItem = () => {
     let buttons = [];
     menu.map((value, index) => {
       let disabledButton = <button disabled={true} value={value.filterValue} property={value.filterProperty} key={index}
@@ -33,24 +33,39 @@ const Header = ({ mainPageCallbackHeader }) => {
     return buttons;
   }
 
-  console.log("searchquery",searchQuery)
+  console.log("searchquery", searchQuery)
+
+  function backToHome(event) {
+    mainPageCallbackHeader({});
+    setKeyOfDisabledButton(undefined);
+    event.preventDefault();
+  }
+
+  function searchSubmitQuery(event) {
+    mainPageCallbackHeader({ filterProperty: "s", filterValue: searchQuery });
+    setKeyOfDisabledButton(undefined);
+    setSearchQuery("");
+    event.preventDefault();
+  }
 
 
   return (
     <div className='header'>
 
       <div className="headerBanner">
-        <h1 className="title">Cocktails</h1>
+        <div className="emptySpace"></div>
+        <h1 className="title" onClick={(event) => { backToHome(event) }}>Cocktails</h1>
+        <form className="searchBar">
+          <input type="text" placeholder="Search Cocktail by Name ..." className="searchBarInput"
+           onChange={(event) => { setSearchQuery(event.target.value); event.preventDefault(); }}></input>
+          <button className="searchBarSubmit" onClick={(event) => { searchSubmitQuery(event) }}>Submit</button>
+        </form>
       </div>
 
       <div className="cocktailMenu">
-        {menuItem()}
+        {selectMenuItem()}
       </div>
-      <form className="searchBar">
-        <input type="text" placeholder="Search Cocktail by Name ..." className="searchBarInput" onChange={(event) => { setSearchQuery(event.target.value);event.preventDefault(); }}></input>
-        <button className="searchBarSubmit" onClick={(event) =>
-           { mainPageCallbackHeader({ filterProperty: "s", filterValue: searchQuery }); setSearchQuery("");event.preventDefault(); }}>Submit</button>
-      </form>
+
     </div>
   );
 };
