@@ -45,6 +45,7 @@ const Header = ({ mainPageCallbackHeader }) => {
     mainPageCallbackHeader({ filterProperty: "s", filterValue: searchQuery });
     setKeyOfDisabledButton(undefined);
     setSearchQuery("");
+
     event.preventDefault();
   }
 
@@ -57,7 +58,7 @@ const Header = ({ mainPageCallbackHeader }) => {
         <h1 className="title" onClick={(event) => { backToHome(event) }}>Cocktails</h1>
         <form className="searchBar">
           <input type="text" placeholder="Search Cocktail by Name ..." className="searchBarInput"
-           onChange={(event) => { setSearchQuery(event.target.value); event.preventDefault(); }}></input>
+           onChange={(event) => { setSearchQuery(event.target.value); event.preventDefault(); }} value={searchQuery}/>
           <button className="searchBarSubmit" onClick={(event) => { searchSubmitQuery(event) }}>Submit</button>
         </form>
       </div>

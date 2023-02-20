@@ -10,6 +10,7 @@ const MainPage = () => {
 
   const [data, setData] = useState();
   const [menuItem, setMenuItem] = useState({});
+  const [showBackButton,setShowBackButton]=useState(false);
 
   function apiAlcoholic(menuItem) {
     let url = '';
@@ -74,10 +75,13 @@ const MainPage = () => {
     <div className="mainPage">
       <Header mainPageCallbackHeader={mainPageCallbackHeader} />
       <div className="main">
+      
         {!data ? '' : data.drinks.map((value, index) => {
           console.log("value",value)
-          return <Cocktail cocktailInformation={value} key={index} mainPageCallbackCocktail={mainPageCallbackCocktail}/>
+          return <Cocktail cocktailInformation={value} key={index}
+           mainPageCallbackCocktail={mainPageCallbackCocktail} setShowBackButton={setShowBackButton}/>
         }) }
+
       </div>
       <Footer />
 
