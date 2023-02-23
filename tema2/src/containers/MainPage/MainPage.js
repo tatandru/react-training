@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Cocktail from "./components/Cocktail";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import CreateCocktail from "./components/CreateCocktail";
 
 
 
@@ -11,6 +12,7 @@ const MainPage = () => {
   const [data, setData] = useState();
   const [menuItem, setMenuItem] = useState({});
   const [showBackButton,setShowBackButton]=useState(false);
+  const [isCreateCocktail,setIsCreateCocktail]=useState(false);
 
   function apiAlcoholic(menuItem) {
     let url = '';
@@ -75,13 +77,13 @@ const MainPage = () => {
     <div className="mainPage">
       <Header mainPageCallbackHeader={mainPageCallbackHeader} />
       <div className="main">
-      
-        {!data ? '' : data.drinks.map((value, index) => {
+
+        {/* {!data ? '' : data.drinks.map((value, index) => {
           console.log("value",value)
           return <Cocktail cocktailInformation={value} key={index}
            mainPageCallbackCocktail={mainPageCallbackCocktail} setShowBackButton={setShowBackButton}/>
-        }) }
-
+        }) } */}
+        <CreateCocktail/>
       </div>
       <Footer />
 
