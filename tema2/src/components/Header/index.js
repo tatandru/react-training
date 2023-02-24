@@ -15,12 +15,13 @@ const Header = ({ mainPageCallbackHeader }) => {
     let buttons = [];
     menu.map((value, index) => {
       let disabledButton = <button disabled={true} value={value.filterValue} property={value.filterProperty} key={index}
-        onClick={(event) => { mainPageCallbackHeader(value); event.preventDefault(); }}
+        onClick={(event) => { mainPageCallbackHeader(value);
+        event.preventDefault();  }}
         className={'menuItem'}>
         {value.filterValue}
       </button>
       let activeButton = <button disabled={false} value={value.filterValue} property={value.filterProperty} key={index}
-        onClick={(event) => { mainPageCallbackHeader(value); setKeyOfDisabledButton(index); event.preventDefault(); }}
+        onClick={(event) => { mainPageCallbackHeader(value); setKeyOfDisabledButton(index); setSearchQuery(""); event.preventDefault(); }}
         className={'menuItem'}>
         {value.filterValue}
       </button>
@@ -38,6 +39,7 @@ const Header = ({ mainPageCallbackHeader }) => {
   function backToHome(event) {
     mainPageCallbackHeader({});
     setKeyOfDisabledButton(undefined);
+    setSearchQuery("");
     event.preventDefault();
   }
 
@@ -48,7 +50,7 @@ const Header = ({ mainPageCallbackHeader }) => {
 
     event.preventDefault();
   }
-
+  console.log("searchquery",searchQuery)
 
   return (
     <div className='header'>
