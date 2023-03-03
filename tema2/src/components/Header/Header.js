@@ -1,5 +1,6 @@
 import "./style.scss";
 import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = ({ mainPageCallbackHeader }) => {
   const menu = [{ filterProperty: "a", filterValue: "Alcoholic" },
@@ -11,27 +12,40 @@ const Header = ({ mainPageCallbackHeader }) => {
   const [keyOfDisabledButton, setKeyOfDisabledButton] = useState();
   const [searchQuery, setSearchQuery] = useState();
 
+  // const selectMenuItem = () => {
+  //   let buttons = [];
+  //   menu.map((value, index) => {
+  //     let disabledButton = <button disabled={true} value={value.filterValue} property={value.filterProperty} key={index}
+  //       onClick={(event) => { mainPageCallbackHeader(value);
+  //       event.preventDefault();  }}
+  //       className={'menuItem'}>
+  //       {value.filterValue}
+  //     </button>
+  //     let activeButton = <button disabled={false} value={value.filterValue} property={value.filterProperty} key={index}
+  //       onClick={(event) => { resetButtonState(event,value,index) }}
+  //       className={'menuItem'}>
+  //       {value.filterValue}
+  //     </button>
+  //     if (index === keyOfDisabledButton) {
+  //       buttons.push(disabledButton);
+  //     } else {
+  //       buttons.push(activeButton);
+  //     }
+  //   })
+  //   return buttons;
+  // }
+
   const selectMenuItem = () => {
-    let buttons = [];
-    menu.map((value, index) => {
-      let disabledButton = <button disabled={true} value={value.filterValue} property={value.filterProperty} key={index}
-        onClick={(event) => { mainPageCallbackHeader(value);
-        event.preventDefault();  }}
-        className={'menuItem'}>
-        {value.filterValue}
-      </button>
-      let activeButton = <button disabled={false} value={value.filterValue} property={value.filterProperty} key={index}
-        onClick={(event) => { resetButtonState(event,value,index) }}
-        className={'menuItem'}>
-        {value.filterValue}
-      </button>
-      if (index === keyOfDisabledButton) {
-        buttons.push(disabledButton);
-      } else {
-        buttons.push(activeButton);
-      }
-    })
-    return buttons;
+    let listOfLinks=[];
+    menu.forEach((menuItem)=>{
+      console.log(menu);
+      console.log(menuItem)
+      listOfLinks.push(<Link to={`/${menuItem.filterValue}`} className={'menuItem'} >{menuItem.filterValue}</Link>)
+    
+    }) 
+    TODO  : //daca menu.filtervalue e in path sa faca highligth la link
+    return listOfLinks;
+    
   }
 
   function resetButtonState(event,value,index){

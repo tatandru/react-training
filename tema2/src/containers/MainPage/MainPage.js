@@ -4,6 +4,7 @@ import Cocktail from "./components/Cocktail/Cocktail";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import CreateCocktail from "./components/CreateCocktail/CreateCocktail";
+import { Outlet } from "react-router-dom";
 
 
 
@@ -76,13 +77,13 @@ const MainPage = () => {
     <div className="mainPage">
       <Header mainPageCallbackHeader={mainPageCallbackHeader} />
       <div className="main">
-
+        <Outlet/>
         {/* {!data ? '' : data.drinks.map((value, index) => {
           console.log("value",value)
           return <Cocktail cocktailInformation={value} key={index}
            mainPageCallbackCocktail={mainPageCallbackCocktail} setShowBackButton={setShowBackButton}/>
         }) } */}
-        <CreateCocktail/>
+        {/* <CreateCocktail/> */}
       </div>
       <Footer />
 
