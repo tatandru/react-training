@@ -1,9 +1,9 @@
 import "./style.scss";
 import React, { useEffect, useState } from "react";
-import Cocktail from "./components/Cocktail";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import CreateCocktail from "./components/CreateCocktail";
+import Cocktail from "./components/Cocktail/Cocktail";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import CreateCocktail from "./components/CreateCocktail/CreateCocktail";
 
 
 
@@ -14,31 +14,30 @@ const MainPage = () => {
   const [showBackButton,setShowBackButton]=useState(false);
   const [isCreateCocktail,setIsCreateCocktail]=useState(false);
 
-  function apiAlcoholic(menuItem) {
+
+  function getUrl(menuItem){
     let url = '';
-    console.log("filter value", menuItem.filterValue);
-    console.log("filter property", menuItem.filterProperty);
     if (menuItem.filterValue === "") {
       url = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
     } else {
       switch (menuItem.filterProperty) {
         case 'a':
-          url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=' + menuItem.filterValue;
-          break;
+         return  url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=' + menuItem.filterValue;
         case 'c':
-          url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=' + menuItem.filterValue;
-          break;
+          return url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=' + menuItem.filterValue;
         case 'g':
-          url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=' + menuItem.filterValue;
-          break;
+          return url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=' + menuItem.filterValue;
         case 's':
-          url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + menuItem.filterValue;
-          break;
+          return url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=' + menuItem.filterValue;
         default:
-          url = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
-          break;
+          return url = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
       }
     }
+
+  }
+
+  function getCocktails(menuItem) {
+    let url = getUrl(menuItem)
 
     fetch(url)
       .then((response) => {
@@ -69,7 +68,7 @@ const MainPage = () => {
   }
 
   useEffect(() => {
-    apiAlcoholic(menuItem);
+    getCocktails(menuItem);
     console.log("menuItem", menuItem)
   }, [menuItem]);
 

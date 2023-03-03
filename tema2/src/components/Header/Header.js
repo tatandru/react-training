@@ -21,7 +21,7 @@ const Header = ({ mainPageCallbackHeader }) => {
         {value.filterValue}
       </button>
       let activeButton = <button disabled={false} value={value.filterValue} property={value.filterProperty} key={index}
-        onClick={(event) => { mainPageCallbackHeader(value); setKeyOfDisabledButton(index); setSearchQuery(""); event.preventDefault(); }}
+        onClick={(event) => { resetButtonState(event,value,index) }}
         className={'menuItem'}>
         {value.filterValue}
       </button>
@@ -34,7 +34,12 @@ const Header = ({ mainPageCallbackHeader }) => {
     return buttons;
   }
 
-  console.log("searchquery", searchQuery)
+  function resetButtonState(event,value,index){
+    mainPageCallbackHeader(value);
+    setKeyOfDisabledButton(index);
+    setSearchQuery("");
+    event.preventDefault();
+  }
 
   function backToHome(event) {
     mainPageCallbackHeader({});
@@ -50,7 +55,6 @@ const Header = ({ mainPageCallbackHeader }) => {
 
     event.preventDefault();
   }
-  console.log("searchquery",searchQuery)
 
   return (
     <div className='header'>
