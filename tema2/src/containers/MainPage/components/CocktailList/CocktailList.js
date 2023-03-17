@@ -7,36 +7,38 @@ const CocktailList = () => {
   console.log("state", state);
   console.log("pathnamne", pathname);
   const [data, setData] = useState();
-  const [menuItem, setMenuItem] = useState({});
+  
+//TO DO: cand intru direct pe url nu gaseste filter.property
 
-  function getUrl(menuItem) {
+  function getUrl(state) {
     let url = "";
-    if (menuItem.filterValue === "") {
+    if (state.filterValue === "") {
       url = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
     } else {
-      switch (menuItem.filterProperty) {
+      switch (state.filterProperty) {
         case "a":
           return (url =
             "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=" +
-            menuItem.filterValue);
+            state.filterValue);
         case "c":
           return (url =
             "https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=" +
-            menuItem.filterValue);
+            state.filterValue);
         case "g":
           return (url =
             "https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=" +
-            menuItem.filterValue);
+            state.filterValue);
         case "s":
           return (url =
             "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" +
-            menuItem.filterValue);
+            state.filterValue);
       }
     }
   }
 
-  function getCocktails(menuItem) {
-    let url = getUrl(menuItem);
+  function getCocktails(state) {
+    let url = getUrl(state);
+    console.log(url);
 
     fetch(url)
       .then((response) => {
@@ -59,13 +61,14 @@ const CocktailList = () => {
   }
 
   useEffect(() => {
-    setMenuItem(state);
-    console.log("asdasd", menuItem);
-    getCocktails(menuItem);
+    
+    console.log("asdasd", state);
+    getCocktails(state);
     console.log("data", data);
-  }, [menuItem, state, pathname]);
+  }, [state, pathname]);
 
   return (
+    
     <>
       {!data
         ? ""
