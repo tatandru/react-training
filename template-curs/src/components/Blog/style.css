@@ -1,0 +1,45 @@
+.blogContainer{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    max-height: 100%;
+    padding: 20px;
+    bottom:50px;
+
+}
+
+.centerContainer{
+    height: 100%;
+    display:flex;
+    width: 70vw;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin:20px;
+}
+
+.card{
+    max-width: 200px;
+
+}
+
+.leftPart{
+    height: 100%;
+    
+
+    width: 15vw;
+}
+
+.rightPart{
+    height: 100%;
+
+    width:15vw;
+}
+
+.cardContent{
+    background-color: blueviolet;
+}
+
+.cardContent p{
+    color:aliceblue
+}
